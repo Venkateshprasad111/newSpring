@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 
-//@Service
+@Service
 public class S3Service {
 
     @Autowired
@@ -24,6 +24,6 @@ public class S3Service {
         metadata.setContentLength(contentLength);
         metadata.setContentType(contentType);
 
-//        s3config.s3Client().putObject(bucketName, keyName, value, metadata);
+        s3config.s3Client().putObject(bucketName, keyName, value, metadata);
     }
 }

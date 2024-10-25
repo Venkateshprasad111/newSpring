@@ -18,7 +18,7 @@ import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRespon
 
 import javax.sql.DataSource;
 
-//@Configuration
+@Configuration
 public class RdsSecret {
     @Value("${aws.region}")
     private String region;
@@ -31,17 +31,17 @@ public class RdsSecret {
 
     private Gson gson=new Gson();
 
-//    @Bean
-//    public DataSource dataSource() {
-//        AwsSecret secrets = getSecret();
-//        return DataSourceBuilder
-//                .create()
-//                //  .driverClassName("com.mysql.cj.jdbc.driver")
-//                .url("jdbc:" + secrets.getEngine() + "://" + secrets.getHost() + ":" + secrets.getPort() + "/news")
-//                .username(secrets.getUsername())
-//                .password(secrets.getPassword())
-//                .build();
-//    }
+    @Bean
+    public DataSource dataSource() {
+        AwsSecret secrets = getSecret();
+        return DataSourceBuilder
+                .create()
+                //  .driverClassName("com.mysql.cj.jdbc.driver")
+                .url("jdbc:" + secrets.getEngine() + "://" + secrets.getHost() + ":" + secrets.getPort() + "/news")
+                .username(secrets.getUsername())
+                .password(secrets.getPassword())
+                .build();
+    }
 
     public AwsSecret getSecret() {
 

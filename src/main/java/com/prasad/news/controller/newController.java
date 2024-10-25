@@ -27,9 +27,8 @@ public class newController {
     @Autowired
     private UserService userService;
 
-//
-//    @Autowired
-//    private S3Service s3Service;
+    @Autowired
+    private S3Service s3Service;
     @Autowired
     private NewsService newsService;
 
@@ -64,30 +63,30 @@ public class newController {
         return ResponseEntity.ok("Success");
     }
 
-//    @PostMapping("/uploads3/{bucketName}")
-//    @SneakyThrows(IOException.class)
-//    public ResponseEntity<?> uploadFile(
-//            @PathVariable("bucketName") String bucketName,
-//            @RequestParam("file") MultipartFile file
-//    ) throws IOException {
-//        if (file.isEmpty()) {
-//            return ResponseEntity.badRequest().body("File is empty");
-//        }
-//
-//        String originalFileName = StringUtils.cleanPath(file.getOriginalFilename());
-//        String contentType = file.getContentType();
-//        long fileSize = file.getSize();
-//        InputStream inputStream = file.getInputStream();
-//        String extension=originalFileName.substring(originalFileName.lastIndexOf("."));
-//        String fileWithoutExtension=originalFileName.substring(0,originalFileName.lastIndexOf("."));
-//        String UUID= java.util.UUID.randomUUID().toString();
-//        String fileName=fileWithoutExtension+UUID+extension;
-//
-//        s3Service.uploadFile(bucketName, fileName, fileSize, contentType, inputStream);
-//
-//        return ResponseEntity.ok().body("File uploaded successfully "+ fileName);
-//
-//    }
+    @PostMapping("/uploads3/{bucketName}")
+    @SneakyThrows(IOException.class)
+    public ResponseEntity<?> uploadFile(
+            @PathVariable("bucketName") String bucketName,
+            @RequestParam("file") MultipartFile file
+    ) throws IOException {
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body("File is empty");
+        }
+
+        String originalFileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String contentType = file.getContentType();
+        long fileSize = file.getSize();
+        InputStream inputStream = file.getInputStream();
+        String extension=originalFileName.substring(originalFileName.lastIndexOf("."));
+        String fileWithoutExtension=originalFileName.substring(0,originalFileName.lastIndexOf("."));
+        String UUID= java.util.UUID.randomUUID().toString();
+        String fileName=fileWithoutExtension+UUID+extension;
+
+        s3Service.uploadFile(bucketName, fileName, fileSize, contentType, inputStream);
+
+        return ResponseEntity.ok().body("File uploaded successfully "+ fileName);
+
+    }
 
     @PostMapping("posts")
     public ResponseEntity<?> uploadNews(@RequestBody Posts posts){
